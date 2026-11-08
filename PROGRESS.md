@@ -16,7 +16,7 @@
 | 本周打开次数 / 卡点后次日回来 | 5 / — |
 | 上次出口 | **阶段 1 过**（`capture.py` 函数化 + 返回值 + main 保护；失败路径验证通过；考前 5 条全满足） |
 | 上次会话 | 2026-11-08 阶段 1 收尾（`save_frame` 重构 + `import` 测试 + 失败路径破坏测试） |
-| 待议 | 项目本地 git 已建（`main`，首次提交 `7c287bd`）；**远程公开库待创建后 push**。`data/` 不入库 |
+| 待议 | git 双层就绪：本地 `main` + 远程公开库 `dejiang336/a1-industrial-inspection`（已 push）；`data/` 不入库 |
 
 > **Day 6 当前定义（以最新记录为准）：阶段 1 过——`save_frame` 返回值取自 `imwrite`、主循环成功才计数；`import capture` 不弹窗；失败路径实测「保存失败 + 计数不动」。暴露两处坑：`return frame.shape` 恒真（假修复）、破坏测试留了 `makedirs` 导致测的是成功场景。**
 
@@ -190,7 +190,7 @@
 - [x] 标签版式：90×60mm 黑白、8/页、二维码 `xiaoxin`、品牌 `xiaoxin`（2026-11-02 定；文件在 `labels/`）
 - [ ] **打印（原定 11-07，延到 11-09 周一）**：先打 `labels/calibration.pdf` 量 100mm / 扫 `xiaoxin`；通过后同机打印 13 页；沿虚线裁保留十字；回家量 px/mm、背面编号、分袋。**硬期限 11-22**（11 月第四周起试拍）
 - [ ] 打印前校准：先打 `labels/calibration.pdf`，量 100mm 线与 px/mm；1mm <2.5px 就移近/换 1280×960
-- [ ] **创建 GitHub 公开库 `a1-industrial-inspection`（空库，不勾 README）→ `git remote add` + push**；MCP token 无建仓权限，需在网页手动建一次
+- [x] GitHub 公开库 `dejiang336/a1-industrial-inspection` 已建并 push（2026-11-08；`data/` 不入库）
 - [ ] 打印批次 B：正常页一次印完；test 的 10 张正常另印一批，记 `batch_id`
 - 数据量：12 月底 ≥40 张（继续信号）；3a 通过 = 80 张（正常≥50 + 缺陷≥30）；寒假第 1 周补足；300+ 不作为 v1 目标
 - [x] OpenCV GUI 修复：2026-11-01 已换 `opencv-python 4.13.0.92`，`GUI: WIN32UI`，`imshow` 可用
