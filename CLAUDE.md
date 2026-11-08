@@ -9,7 +9,7 @@
 | 档位 | **Flash 全程**（要换先查 [[deepseek-model-archive]]） |
 | 启动必读 | ① 本文件 ② `PROGRESS.md`；阶段开始读 `STAGES.md`；卡住读 `DEBUG.md`；采集读 `DATA.md`；查资料读 `RESOURCES.md` |
 | 铁律 | 每天只追加 PROGRESS 不改旧；**出口驱动，不认「懂了」**；不擅自加线、换方向、扩范围；装依赖前先问 |
-| 收工 | 更新 PROGRESS（做了什么 / 卡在哪 / 产出 / 下一步 / 想不想继续） |
+| 收工 | 更新 PROGRESS（做了什么 / 卡在哪 / 产出 / 下一步 / 想不想继续）+ `git commit` |
 
 ---
 
