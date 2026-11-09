@@ -29,9 +29,16 @@ C++：`_getch()` 拿键码；Java：AWT 的 `KeyEvent.getKeyCode()`。
 `ret, frame = cap.read()` 才返回两个值：`ret` 是**这一帧有没有读到**（True/False），`frame` 是**画面本身**——NumPy 数组，`shape=(480, 640, 3)` = 480 行 × 640 列 × 3 个颜色通道。
 C++：`cv::VideoCapture cap(0);` 是对象，`cap.read(frame)` 返回 bool；Java：`new FileInputStream(path)` 拿到的是流对象，不是文件内容。
 
+## ndarray（NumPy 数组）/ `shape`
+`cv2.imread` 读进来的不是「图片」，是**一个 NumPy 多维数组**：图像每个像素的每个通道值，就是数组里的一个数。`.shape` 是**属性**（没有括号），返回元组：
+`(行数, 列数, 通道数)` = `(高, 宽, 3)`。索引顺序同理：`img[y, x]`，第一个下标是行（往下），第二个才是列（往右）。
+**宽在前是直觉陷阱**：`(640, 480)` 是错的写法，除非你在调 Java 风格接口。
+C++：`cv::Mat` 的 `rows / cols / channels()`，同样「行在前」；Java：`BufferedImage.getHeight()/getWidth()`，这个反而是高在前、宽在后，名字里写清楚了。
+
 ## 真假判断（truthiness）
 `if x:` 不要求 `x` 是 `bool`：`None`、`0`、`""`、`[]`、`()`、`{}` 算假，**其他都算真**。
 坑：`return frame.shape` 返回 `(480, 640, 3)`，非空元组恒为真，`if` 永远进 True 分支——看着像判了成败，实际什么都没判。要判成败就返回**真正表示成败的值**（如 `imwrite` 的 bool）。
+**ndarray 不一样，它不是恒真，是拒绝判断**：`if img:` 先调 `bool(img)`，元素多于 1 个时直接抛 `ValueError: The truth value of an array with more than one element is ambiguous`。所以「可能为 `None`」的对象一律用 `is None` / `is not None` 判空，不用真假判断。
 C++：没有对应写法，`if (tuple)` 编不过；Java 必须是 boolean。Python 的宽松是这里唯一的新东西。
 
 ## `if __name__ == "__main__"`
