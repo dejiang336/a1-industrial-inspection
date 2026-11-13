@@ -5,3 +5,7 @@ __pycache__/
 data/
 models/
 *.tmp
+# 本机调试输出（实景照片，不进公开仓）
+s3_boxes.png
+s3b_boxes.png
+s3c_boxes.png

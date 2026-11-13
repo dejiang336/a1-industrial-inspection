@@ -56,3 +56,9 @@ C++：`main()` 不会因为链接就被调用；Java：import 一个类不会执
 
 ## 事件泵（event pump）
 `waitKey(n)` 不只是「等 n 毫秒按键」，它还负责处理窗口的键盘/鼠标/重绘消息。`waitKey(1)` 每圈放行 1 毫秒，循环自己转；`waitKey(0)` 无限等，**按键成了循环的「发条」**——不按键，画面不刷新，循环体里的 30 秒判断也永远走不到。
+
+## 轮廓（contour）/ 外接矩形（bounding box）
+轮廓 = 二值图里**一片连通白像素的外边界点序列**。`findContours(binary, ...)` 在 4.x 返回 **2 个值** `(contours, hierarchy)`（3.x 才是 3 个，旧教程照抄会 ValueError）；`RETR_EXTERNAL` 只取最外层，不数白块里的洞。
+`boundingRect(c)` 把一条轮廓压成外接矩形，返回**左上角 + 宽高** `(x, y, w, h)`；`rectangle` 要两个对角点：`(x, y)` 和 `(x+w, y+h)`。
+C++：`std::vector<std::vector<cv::Point>>` + `cv::boundingRect`；Java：`List<List<Point>>` + `Rectangle`。
+两个坑：① **区域数不是阈值的单调函数**——阈值升高时「分裂」（亮区被新暗线切开，+）和「消失」（小亮块掉到阈值下，−）同时发生，净和看谁赢（实测 100→137，150→108）；不要从「白像素变少」直接推「区域变少」。② `rectangle` 只改**内存数组**，要交出去必须 `imwrite` **同一张图**；画在 `img` 上却存 `binary`，存出来的图里没有框。
