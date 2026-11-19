@@ -112,5 +112,6 @@ L001, 20261120_L001_front_0_missing_01.jpg, missing, front, 0, 30, phone, 1280x9
 - 打印文件：`labels/normal.pdf`（10 页）、`labels/missing_text.pdf` / `missing_qr.pdf` / `missing_border.pdf`（各 1 页）、`labels/calibration.pdf`。
 - 扫码是本地解码，系统相机直接显示 `xiaoxin`，不需要注册；它显示的是文本，不是商品页（商品页要挂网址，v1 不做）。
 - 2026-11-02 从 Code 39 改为 QR：手机系统相机把 Code39 当商品码查询，显示“无商品”；QR 模块更大、更稳。
+- **实物卡尺寸（2026-11-19 定）**：卡片 **100×70mm**，标签 90×60 居中，四周约 5mm 白边。白边不进 ROI（按四角十字裁），模型看不到；**缺陷必须造在黑框以内的印刷区，不能造在白边上**。
 - **阶段 4 输入**：先按四角基准裁 ROI 再缩放；不要把整帧 640×480 直接缩到 256（二维码只剩约 1px/模块）。
 - 详细打印/裁切/分配见 `labels/README.md`。
